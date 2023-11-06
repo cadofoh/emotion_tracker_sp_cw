@@ -1,5 +1,6 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
+    // Insecure version: No password hashing, no proper input validation
     $username = $_POST['username'];
     $password = $_POST['password'];
 
