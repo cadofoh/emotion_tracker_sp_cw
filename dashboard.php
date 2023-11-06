@@ -23,7 +23,8 @@ if (!isset($_SESSION['user_id'])) {
             <div class="col-md-6 offset-md-3">
                 <form action="save_emotion.php" method="post">
                     <div class="form-group">
-                        <textarea class="form-control" name="emotion" rows="4" placeholder="How are you feeling today?"></textarea>
+                        <textarea class="form-control" name="emotion[]" rows="4" placeholder="How are you feeling today?"></textarea> 
+
                     </div>
                     <button type="submit" class="btn btn-primary btn-block">Save Emotion</button>
                 </form>
