@@ -9,9 +9,10 @@ if (!isset($_SESSION['user_id'])) {
 require 'includes/db.php';
 
 $user_id = $_SESSION['user_id'];
-$stmt = $conn->prepare("SELECT emotion_text, timestamp FROM emotions WHERE user_id = ?");
-$stmt->execute([$user_id]);
-$emotions = $stmt->fetchAll();
+// Insecure: No prepared statement or validation
+$query = "SELECT emotion_text, timestamp FROM emotions WHERE user_id = $user_id";
+$result = $conn->query($query);
+$emotions = $result->fetchAll();
 ?>
 
 <!DOCTYPE html>

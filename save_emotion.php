@@ -14,11 +14,10 @@ if (isset($_POST['emotion'])) {
 
     $user_id = $_SESSION['user_id'];
 
-    // Insert multiple emotions into the database
+    // Insecure: Directly inserting user input into SQL query without validation
     foreach ($emotions as $emotion) {
-        $stmt = $conn->prepare("INSERT INTO emotions (user_id, emotion_text) VALUES (?, ?)");
-       $stmt->execute([$user_id, $emotion]);
-       
+        $query = "INSERT INTO emotions (user_id, emotion_text) VALUES ($user_id, '$emotion')";
+        $conn->query($query);
     }
 }
 
