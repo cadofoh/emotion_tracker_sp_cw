@@ -5,15 +5,15 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Emotion Tracker - Dashboard</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.1/emojionearea.css">
 </head>
+
 <body>
     <div class="container mt-5">
         <div class="jumbotron text-center">
@@ -23,15 +23,29 @@ if (!isset($_SESSION['user_id'])) {
             <div class="col-md-6 offset-md-3">
                 <form action="save_emotion.php" method="post">
                     <div class="form-group">
-                        <textarea class="form-control" name="emotion[]" rows="4" placeholder="How are you feeling today?"></textarea> 
-
+                        <textarea class="form-control" name="emotion[]" id="emoji-input" rows="4" placeholder="How are you feeling today?"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block">Save Emotion</button>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Save Emotion</button>
+                    </div>
                 </form>
-                <a href="view_emotions.php" class="btn btn-info btn-block mt-3">View Past Entries</a>
-                <a href="logout.php" class="btn btn-danger btn-block mt-3">Logout</a>
+                <div class="text-center"> <!-- Center-align the buttons -->
+                    <a href="view_emotions.php" class="btn btn-info mt-3">View Past Entries</a>
+                    <a href="logout.php" class="btn btn-danger mt-3">Logout</a>
+                </div>
             </div>
         </div>
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.1/emojionearea.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $("#emoji-input").emojioneArea();
+        });
+    </script>
 </body>
 </html>
