@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-
+//Session authentication
 if (!isset($_SESSION['user_id'])) {
     header('Location: index.php');
     exit();
@@ -14,12 +14,11 @@ if (isset($_POST['emotion'])) {
 
     $user_id = $_SESSION['user_id'];
 
-    // Insecure: Directly inserting user input into SQL query without validation
+    //Prepared statement
     foreach ($emotions as $emotion) {
-        $query = "INSERT INTO emotions (user_id, emotion_text) VALUES ($user_id, '$emotion')";
-        $conn->query($query);
+        $stmt = $conn->prepare("INSERT INTO emotions (user_id, emotion_text) VALUES (?, ?)");
+        $stmt->execute([$user_id, $emotion]);
     }
 }
 
 header('Location: dashboard.php');
-?>
