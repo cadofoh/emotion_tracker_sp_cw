@@ -18,18 +18,21 @@ $emotions = $stmt->fetchAll();
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Emotion Tracker - Past Entries</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
+
 <body>
     <div class="past-entries">
         <h2>Past Entries</h2>
         <?php foreach ($emotions as $emotion) : ?>
-            <!--Output encoding -->
-            <p><?php echo $emotion['timestamp'] . ": " . $emotion['emotion_text']; ?></p>
+            <!-- Prevents XSS by escaping special characters -->
+            <p><?php echo htmlspecialchars($emotion['timestamp']) . ": " . htmlspecialchars($emotion['emotion_text']); ?></p>
         <?php endforeach; ?>
         <a href="dashboard.php">Go Back</a>
     </div>
 </body>
+
 </html>

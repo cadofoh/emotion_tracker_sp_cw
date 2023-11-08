@@ -5,14 +5,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
 
     require 'includes/db.php';
 
-    // Insecure: Directly inserting user input into SQL query without validation
-    // This is susceptible to SQL injection and should not be used .
-    $query = "SELECT user_id, username, password FROM users WHERE username = '$username' AND password = '$password'";
-    $result = $conn->query($query);
-    $user = $result->fetch();
+    // Secure version: Prepared statement to prevent SQL injection
+    $stmt = $conn->prepare("SELECT user_id, username, password FROM users WHERE username = ?");
+    $stmt->execute([$username]);
+    $user = $stmt->fetch();
 
-    if ($user) {
-        // Insecure: Passwords are stored in plain text
+    if ($user && password_verify($password, $user['password'])) {
+        // Secure: Passwords are hashed and verified
         // Login successful; create a session to indicate the user is logged in
         session_start();
         $_SESSION['user_id'] = $user['user_id'];
@@ -26,4 +25,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
         $error = 'Invalid username or password. Please try again.';
     }
 }
-?>
