@@ -1,8 +1,8 @@
 <?php
 $host = "localhost";
 $dbname = "emotion_tracker";
-$dblogin = "root";
-$dbpassword = "";
+$dblogin = "myemotionlogin";
+$dbpassword = "emotionalpassword!";
 
 try {
     $conn = new PDO("mysql:host=$host;dbname=$dbname", $dblogin, $dbpassword);
