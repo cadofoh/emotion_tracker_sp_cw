@@ -21,7 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
         header('Location: dashboard.php');
         exit();
     } else {
-        // Login failed; display an error message
-        $error = 'Invalid username or password. Please try again.';
+        // Login failed; set the error message in a query parameter
+        header('Location: index.php?error=1'); // Redirect to the login page with an error flag
+        exit();
     }
 }
