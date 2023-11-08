@@ -14,6 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
         $error = 'Password must be at least 8 characters long.';
     } elseif (!preg_match('/^[a-zA-Z0-9]+$/', $username)) {
         $error = 'Invalid characters in the username.';
+    } elseif (!preg_match('/^(?=.*\d)(?=.*[A-Za-z])[A-Za-z\d]{8,}$/', $password)) {
+        $error = 'Password must contain at least one letter, one number, and be at least 8 characters long.';
     } else {
         require 'includes/db.php';
 
