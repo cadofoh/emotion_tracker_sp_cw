@@ -2,7 +2,7 @@
 $host = "localhost";
 $dbname = "emotion_tracker";
 $dblogin = "myemotionlogin";
-$dbpassword = "emotionalpassword!";
+$dbpassword = "9L?XeLzY5PH!DstC";
 
 try {
     $conn = new PDO("mysql:host=$host;dbname=$dbname", $dblogin, $dbpassword);
